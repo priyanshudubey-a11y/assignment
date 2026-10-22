@@ -1,0 +1,23 @@
+{
+  "name": "quote-portal-tests",
+  "version": "0.1.0",
+  "private": true,
+  "description": "QA automation for Quote Portal Phase 1 (written in Session 4, executed in Session 5)",
+  "scripts": {
+    "test:unit": "playwright test --project=unit",
+    "test:api": "playwright test --project=api",
+    "test:ui": "playwright test --project=ui",
+    "test:perf": "playwright test --project=perf",
+    "test:regression": "playwright test --project=unit --project=api --project=ui --grep @regression",
+    "test:all": "playwright test --project=unit --project=api --project=ui",
+    "list": "playwright test --list",
+    "typecheck": "tsc --noEmit",
+    "trace": "node tools/traceability.mjs"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.10.2",
+    "@playwright/test": "1.49.1",
+    "@types/node": "22.10.2",
+    "typescript": "5.7.2"
+  }
+}

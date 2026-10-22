@@ -29,14 +29,14 @@ Status: Draft v0.1 (Session 3), pending user confirmation. Sources: `docs/requir
 
 | Level | Test cases |
 | --- | --- |
-| Unit | TC-045, TC-069, TC-071 |
-| API | TC-002, TC-005, TC-008, TC-016, TC-022, TC-023, TC-024, TC-025, TC-026, TC-027, TC-028, TC-029, TC-030, TC-031, TC-033, TC-034, TC-043, TC-051, TC-052, TC-053, TC-055, TC-070, TC-072, TC-073, TC-080, TC-094 |
-| UI / E2E | TC-001, TC-003, TC-004, TC-006, TC-007, TC-009, TC-010, TC-011, TC-012, TC-013, TC-014, TC-015, TC-017, TC-020, TC-021, TC-032, TC-040, TC-041, TC-042, TC-044, TC-046, TC-047, TC-048, TC-050, TC-054, TC-060 to TC-068, TC-083, TC-090, TC-091 |
-| Performance | TC-093 |
-| Scripted manual / ops | TC-081, TC-082, TC-084, TC-092 |
+| Unit (3) | TC-045, TC-069, TC-071 |
+| API (26) | TC-002, TC-005, TC-008, TC-016, TC-022, TC-023, TC-024, TC-025, TC-026, TC-027, TC-028, TC-029, TC-030, TC-031, TC-033, TC-034, TC-043, TC-051, TC-052, TC-053, TC-055, TC-070, TC-072, TC-073, TC-080, TC-094 |
+| UI / E2E (37) | TC-001, TC-003, TC-004, TC-006, TC-007, TC-009, TC-010, TC-011, TC-012, TC-013, TC-014, TC-015, TC-017, TC-020, TC-021, TC-032, TC-040, TC-041, TC-042, TC-044, TC-046, TC-047, TC-048, TC-050, TC-054, TC-060, TC-061, TC-062, TC-063, TC-064, TC-065, TC-066, TC-067, TC-068, TC-083, TC-090, TC-091 |
+| Performance (1) | TC-093 |
+| Scripted manual / ops (4) | TC-081, TC-082, TC-084, TC-092 |
 
 - Brief note: the level is the main level; several cases also have an API or UI assertion in the same script (for example TC-004 checks the UI message and that no cookie is set).
-- 3 + 26 + 36 + 1 + 4 = 70 plus TC-094 counted under API above; the task file counts each test case once (71 tasks, QA-01 to QA-71).
+- Totals: 3 unit + 26 API + 37 UI / E2E + 1 performance + 4 scripted manual = 71 test cases, each automated or scripted by exactly one task QA-Tnnn in `plans/tasks-qa.md`.
 
 ## 4. Test data
 
@@ -67,7 +67,7 @@ Status: Draft v0.1 (Session 3), pending user confirmation. Sources: `docs/requir
 ## 7. Sequencing and risks
 
 - Brief intro: harness first, then the regression pack, then the rest by area.
-- **Order:** QA-01 to QA-03 (harness, fixtures, reset) → regression pack cases → login and access control → list and pagination → quote view and isolation → newer-version notice and seed → ops and non-functional.
+- **Order:** QA-01 to QA-03 and QA-05 (harness, fixtures, reset, checklist) → regression pack cases → login and access control → list and pagination → quote view and isolation → newer-version notice and seed → ops and non-functional.
 - **Risk: PENDING cases.** Ten cases (TC-006, 007, 013, 020, 028, 030, 031, 044, 072, 073) have undefined expected results. Automation for them is written against the proposed defaults in Q-P3 to Q-P5 and is marked `pending-decision` so a wrong default is cheap to change.
 - **Risk: time-based tests.** TC-060 and TC-063 wait up to 60 s or 130 s. Mitigation: the polling interval is a configurable constant, so the suite can shorten it in a dedicated test build while one end-to-end run keeps the real interval.
 - **Risk: test order and shared data.** Mitigation: data-changing tests reset the seed (QA-02).

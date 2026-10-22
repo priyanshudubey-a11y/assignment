@@ -1,0 +1,24 @@
+{
+  "name": "quote-portal-backend",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Quote Portal Phase 1 backend (Express + SQLite behind QuoteRepository)",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=22.5"
+  },
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning src/server.js",
+    "dev": "node --disable-warning=ExperimentalWarning --watch src/server.js",
+    "seed": "node --disable-warning=ExperimentalWarning scripts/seed.js",
+    "seed:revise": "node --disable-warning=ExperimentalWarning scripts/seed-revise.js",
+    "perf:generate": "node --disable-warning=ExperimentalWarning scripts/generate-load.js",
+    "perf": "node --disable-warning=ExperimentalWarning scripts/perf.js",
+    "lint": "eslint .",
+    "test": "node --disable-warning=ExperimentalWarning --test \"test/**/*.test.js\"",
+    "ci": "npm run lint && npm test"
+  },
+  "dependencies": {
+    "express": "^4.22.3"
+  }
+}
