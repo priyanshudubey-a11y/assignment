@@ -7,7 +7,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-be.md`. Contract: `plans/opena
 
 ## B1 — Foundation
 
-- **BE-01 — Backend scaffold and error handling**
+- [x] **BE-01 — Backend scaffold and error handling**
   - Requirements: NFR-02 (baseline hygiene), foundation for all FRs
   - Acceptance criteria:
     - The API starts from one command with configuration from environment variables only.
@@ -17,7 +17,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-be.md`. Contract: `plans/opena
   - Dependencies: Q-P1
   - Verified by: TC-094
 
-- **BE-02 — Data model, migrations and `QuoteRepository`**
+- [x] **BE-02 — Data model, migrations and `QuoteRepository`**
   - Requirements: FR-01, FR-03, FR-04, FR-07, FR-08
   - Acceptance criteria:
     - Tables for Organisation, User, Quote, QuoteVersion and QuoteLineItem exist as in `spec.md` section 2; money is stored as integer minor units.
@@ -27,7 +27,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-be.md`. Contract: `plans/opena
   - Dependencies: BE-01
   - Verified by: TC-043, TC-070
 
-- **BE-13 — Contract validation in CI**
+- [x] **BE-13 — Contract validation in CI**
   - Requirements: FR-01 to FR-04, FR-06, FR-07, NFR-01 (all endpoints)
   - Acceptance criteria:
     - CI fails if `plans/openapi.yaml` is invalid.
@@ -38,7 +38,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-be.md`. Contract: `plans/opena
 
 ## B2 — Authentication, seed and scoping
 
-- **BE-05 — Password hashing and session management**
+- [x] **BE-05 — Password hashing and session management**
   - Requirements: FR-02, NFR-02 (baseline)
   - Acceptance criteria:
     - Passwords are stored only as salted hashes with a documented work factor; no plaintext anywhere (database, logs, responses).
@@ -48,7 +48,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-be.md`. Contract: `plans/opena
   - Dependencies: BE-01, BE-02
   - Verified by: TC-008, TC-014, TC-094
 
-- **BE-06 — `POST /api/auth/login`**
+- [x] **BE-06 — `POST /api/auth/login`**
   - Requirements: FR-02
   - Acceptance criteria:
     - Correct credentials return 200 with the user and set the session cookie; the endpoint never issues a redirect.
@@ -60,7 +60,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-be.md`. Contract: `plans/opena
   - Dependencies: BE-02, BE-05
   - Verified by: TC-001 to TC-008
 
-- **BE-07 — `POST /api/auth/logout` and `GET /api/me`**
+- [x] **BE-07 — `POST /api/auth/logout` and `GET /api/me`**
   - Requirements: FR-06, FR-02
   - Acceptance criteria:
     - Logout returns 204, clears the cookie and invalidates the session server-side; logout with no session also returns 204.
@@ -69,7 +69,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-be.md`. Contract: `plans/opena
   - Dependencies: BE-05, BE-08
   - Verified by: TC-014, TC-015, TC-017
 
-- **BE-08 — Authentication middleware and organisation scoping**
+- [x] **BE-08 — Authentication middleware and organisation scoping**
   - Requirements: FR-04, FR-02
   - Acceptance criteria:
     - Every `/api` route except login, logout and health returns 401 `UNAUTHENTICATED` JSON when there is no valid session.
@@ -78,7 +78,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-be.md`. Contract: `plans/opena
   - Dependencies: BE-02, BE-05
   - Verified by: TC-016, TC-034, TC-055
 
-- **BE-03 — Seed script**
+- [x] **BE-03 — Seed script**
   - Requirements: FR-08
   - Acceptance criteria:
     - `npm run seed` creates the data of the agreed seed shape (Q-P4): organisations and users holding 0, 1, 50 and 51 quotes; ORG-B with its own quotes including Q-B1; Q-MULTI with 3 versions; Q-REV with 1 version; Q-NOLINES; at least 5 quotes with the same sort timestamp (Q-TIES).
@@ -89,7 +89,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-be.md`. Contract: `plans/opena
   - Dependencies: BE-02, BE-05, Q-P4
   - Verified by: TC-043, TC-045, TC-072, TC-073
 
-- **BE-04 — `seed:revise`**
+- [x] **BE-04 — `seed:revise`**
   - Requirements: FR-08, FR-07
   - Acceptance criteria:
     - `npm run seed:revise -- <quoteId>` creates version n+1 with its line items, marks the previous current version superseded and updates the quote's current version, all in one transaction.
@@ -100,7 +100,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-be.md`. Contract: `plans/opena
 
 ## B3 — Quote API
 
-- **BE-09 — `GET /api/quotes`**
+- [x] **BE-09 — `GET /api/quotes`**
   - Requirements: FR-03, FR-04
   - Acceptance criteria:
     - Defaults are page 1, pageSize 20, sort `issued_at:desc`; order is the sort field then id descending.
@@ -112,7 +112,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-be.md`. Contract: `plans/opena
   - Dependencies: BE-02, BE-08, BE-03 (data), Q-P3, Q-P5
   - Verified by: TC-020 to TC-027, TC-029 to TC-034
 
-- **BE-10 — `GET /api/quotes/{id}`**
+- [x] **BE-10 — `GET /api/quotes/{id}`**
   - Requirements: FR-01, FR-04, FR-07
   - Acceptance criteria:
     - Returns the quote, its current version with line items, `currentVersionNo` and all versions newest first.
@@ -123,7 +123,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-be.md`. Contract: `plans/opena
   - Dependencies: BE-02, BE-08
   - Verified by: TC-040 to TC-045, TC-048, TC-050, TC-051, TC-053, TC-066
 
-- **BE-11 — `GET /api/quotes/{id}/versions/{versionNo}`**
+- [x] **BE-11 — `GET /api/quotes/{id}/versions/{versionNo}`**
   - Requirements: FR-01, FR-04, FR-07
   - Acceptance criteria:
     - Returns the version with `isCurrent`, `superseded` (always the inverse of `isCurrent`) and `currentVersionNo`.
@@ -132,7 +132,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-be.md`. Contract: `plans/opena
   - Dependencies: BE-02, BE-08
   - Verified by: TC-042, TC-052, TC-062, TC-064
 
-- **BE-12 — `GET /api/health`**
+- [x] **BE-12 — `GET /api/health`**
   - Requirements: NFR-01
   - Acceptance criteria:
     - Needs no authentication and returns 200 `{status: "ok"}` when the app and database are reachable.
@@ -161,7 +161,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-be.md`. Contract: `plans/opena
   - Dependencies: BE-12, BE-14, Q-P2
   - Verified by: TC-081, TC-082
 
-- **BE-16 — List performance**
+- [x] **BE-16 — List performance**
   - Requirements: spec NFR-04 (list performance), FR-03
   - Acceptance criteria:
     - An index supports the list query by organisation, sort field and id.

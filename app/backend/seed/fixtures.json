@@ -1,0 +1,221 @@
+{
+  "orgs": {
+    "ORG-0": {
+      "id": "org_org-0",
+      "name": "Zero Quotes Ltd"
+    },
+    "ORG-1": {
+      "id": "org_org-1",
+      "name": "One Quote Ltd"
+    },
+    "ORG-50": {
+      "id": "org_org-50",
+      "name": "Fifty Quotes Ltd"
+    },
+    "ORG-51": {
+      "id": "org_org-51",
+      "name": "Fifty-One Quotes Ltd"
+    },
+    "ORG-B": {
+      "id": "org_org-b",
+      "name": "Other Org B Ltd"
+    }
+  },
+  "users": {
+    "U-0": {
+      "email": "user0@org0.example.test",
+      "password": "Test-Passw0rd!",
+      "orgKey": "ORG-0"
+    },
+    "U-1": {
+      "email": "user1@org1.example.test",
+      "password": "Test-Passw0rd!",
+      "orgKey": "ORG-1"
+    },
+    "U-50": {
+      "email": "user50@org50.example.test",
+      "password": "Test-Passw0rd!",
+      "orgKey": "ORG-50"
+    },
+    "U-51": {
+      "email": "user51@org51.example.test",
+      "password": "Test-Passw0rd!",
+      "orgKey": "ORG-51"
+    },
+    "U-B": {
+      "email": "userb@orgb.example.test",
+      "password": "Test-Passw0rd!",
+      "orgKey": "ORG-B"
+    }
+  },
+  "quotes": {
+    "Q-MULTI": {
+      "id": "qt_org-51-multi",
+      "reference": "ORG-51-MULTI"
+    },
+    "Q-REV": {
+      "id": "qt_org-51-rev",
+      "reference": "ORG-51-REV"
+    },
+    "Q-NOLINES": {
+      "id": "qt_org-51-nolines",
+      "reference": "ORG-51-NOLINES"
+    },
+    "Q-TIES-1": {
+      "id": "qt_org-51-tie1",
+      "reference": "ORG-51-TIE1"
+    },
+    "Q-TIES-2": {
+      "id": "qt_org-51-tie2",
+      "reference": "ORG-51-TIE2"
+    },
+    "Q-TIES-3": {
+      "id": "qt_org-51-tie3",
+      "reference": "ORG-51-TIE3"
+    },
+    "Q-TIES-4": {
+      "id": "qt_org-51-tie4",
+      "reference": "ORG-51-TIE4"
+    },
+    "Q-TIES-5": {
+      "id": "qt_org-51-tie5",
+      "reference": "ORG-51-TIE5"
+    },
+    "Q-TIES": {
+      "id": "qt_org-51-tie1",
+      "reference": "ORG-51-TIE1",
+      "ids": [
+        "qt_org-51-tie1",
+        "qt_org-51-tie2",
+        "qt_org-51-tie3",
+        "qt_org-51-tie4",
+        "qt_org-51-tie5"
+      ]
+    },
+    "Q-B1": {
+      "id": "qt_org-b-q-b1",
+      "reference": "ORG-B-Q-B1"
+    }
+  },
+  "quoteIdsByOrg": {
+    "ORG-0": [],
+    "ORG-1": [
+      "qt_org-1-q001"
+    ],
+    "ORG-50": [
+      "qt_org-50-q001",
+      "qt_org-50-q002",
+      "qt_org-50-q003",
+      "qt_org-50-q004",
+      "qt_org-50-q005",
+      "qt_org-50-q006",
+      "qt_org-50-q007",
+      "qt_org-50-q008",
+      "qt_org-50-q009",
+      "qt_org-50-q010",
+      "qt_org-50-q011",
+      "qt_org-50-q012",
+      "qt_org-50-q013",
+      "qt_org-50-q014",
+      "qt_org-50-q015",
+      "qt_org-50-q016",
+      "qt_org-50-q017",
+      "qt_org-50-q018",
+      "qt_org-50-q019",
+      "qt_org-50-q020",
+      "qt_org-50-q021",
+      "qt_org-50-q022",
+      "qt_org-50-q023",
+      "qt_org-50-q024",
+      "qt_org-50-q025",
+      "qt_org-50-q026",
+      "qt_org-50-q027",
+      "qt_org-50-q028",
+      "qt_org-50-q029",
+      "qt_org-50-q030",
+      "qt_org-50-q031",
+      "qt_org-50-q032",
+      "qt_org-50-q033",
+      "qt_org-50-q034",
+      "qt_org-50-q035",
+      "qt_org-50-q036",
+      "qt_org-50-q037",
+      "qt_org-50-q038",
+      "qt_org-50-q039",
+      "qt_org-50-q040",
+      "qt_org-50-q041",
+      "qt_org-50-q042",
+      "qt_org-50-q043",
+      "qt_org-50-q044",
+      "qt_org-50-q045",
+      "qt_org-50-q046",
+      "qt_org-50-q047",
+      "qt_org-50-q048",
+      "qt_org-50-q049",
+      "qt_org-50-q050"
+    ],
+    "ORG-51": [
+      "qt_org-51-q001",
+      "qt_org-51-q002",
+      "qt_org-51-q003",
+      "qt_org-51-q004",
+      "qt_org-51-q005",
+      "qt_org-51-q006",
+      "qt_org-51-q007",
+      "qt_org-51-q008",
+      "qt_org-51-q009",
+      "qt_org-51-q010",
+      "qt_org-51-q011",
+      "qt_org-51-q012",
+      "qt_org-51-q013",
+      "qt_org-51-q014",
+      "qt_org-51-q015",
+      "qt_org-51-q016",
+      "qt_org-51-q017",
+      "qt_org-51-q018",
+      "qt_org-51-q019",
+      "qt_org-51-q020",
+      "qt_org-51-q021",
+      "qt_org-51-q022",
+      "qt_org-51-q023",
+      "qt_org-51-q024",
+      "qt_org-51-q025",
+      "qt_org-51-q026",
+      "qt_org-51-q027",
+      "qt_org-51-q028",
+      "qt_org-51-q029",
+      "qt_org-51-q030",
+      "qt_org-51-q031",
+      "qt_org-51-q032",
+      "qt_org-51-q033",
+      "qt_org-51-q034",
+      "qt_org-51-q035",
+      "qt_org-51-q036",
+      "qt_org-51-q037",
+      "qt_org-51-q038",
+      "qt_org-51-q039",
+      "qt_org-51-q040",
+      "qt_org-51-q041",
+      "qt_org-51-q042",
+      "qt_org-51-q043",
+      "qt_org-51-multi",
+      "qt_org-51-rev",
+      "qt_org-51-nolines",
+      "qt_org-51-tie1",
+      "qt_org-51-tie2",
+      "qt_org-51-tie3",
+      "qt_org-51-tie4",
+      "qt_org-51-tie5"
+    ],
+    "ORG-B": [
+      "qt_org-b-q001",
+      "qt_org-b-q002",
+      "qt_org-b-q003",
+      "qt_org-b-q004",
+      "qt_org-b-q005",
+      "qt_org-b-q006",
+      "qt_org-b-q007",
+      "qt_org-b-q-b1"
+    ]
+  }
+}

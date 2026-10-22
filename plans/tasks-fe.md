@@ -7,7 +7,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-fe.md`. Contract: `plans/opena
 
 ## F1 — Foundation
 
-- **FE-01 — Scaffold, API client and mock server**
+- [x] **FE-01 — Scaffold, API client and mock server**
   - Requirements: foundation for FR-01 to FR-04, FR-06, FR-07
   - Acceptance criteria:
     - The React app starts from one command and `/api` calls go to the same origin through a dev proxy.
@@ -19,7 +19,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-fe.md`. Contract: `plans/opena
 
 ## F2 — Sign-in
 
-- **FE-02 — Routing, session bootstrap and auth guard**
+- [x] **FE-02 — Routing, session bootstrap and auth guard**
   - Requirements: FR-02, FR-04
   - Acceptance criteria:
     - The app calls `GET /api/me` before showing any protected page; no protected content flashes while it is pending.
@@ -29,7 +29,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-fe.md`. Contract: `plans/opena
   - Dependencies: FE-01
   - Verified by: TC-009, TC-016, TC-017
 
-- **FE-03 — Login screen**
+- [x] **FE-03 — Login screen**
   - Requirements: FR-02
   - Acceptance criteria:
     - Email and password fields with labels, a submit button, and required-field and malformed-email messages shown per field without sending a request **[P wording, Q-P5]**.
@@ -41,7 +41,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-fe.md`. Contract: `plans/opena
   - Dependencies: FE-02
   - Verified by: TC-001 to TC-008
 
-- **FE-04 — Post-login redirect and return path**
+- [x] **FE-04 — Post-login redirect and return path**
   - Requirements: FR-02
   - Acceptance criteria:
     - After a successful login the app navigates once, using `replace`, to `next` when it is a same-origin path matching the whitelist (quote list, a quote, a quote version), otherwise to the quote list.
@@ -51,7 +51,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-fe.md`. Contract: `plans/opena
   - Dependencies: FE-02, FE-03
   - Verified by: TC-001, TC-009 to TC-013, TC-017
 
-- **FE-05 — Logout**
+- [x] **FE-05 — Logout**
   - Requirements: FR-06
   - Acceptance criteria:
     - A logout control is visible on every signed-in page.
@@ -62,7 +62,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-fe.md`. Contract: `plans/opena
 
 ## F3 — Browse and view
 
-- **FE-06 — Quote list page**
+- [x] **FE-06 — Quote list page**
   - Requirements: FR-03
   - Acceptance criteria:
     - A table shows reference, title, status, current version, total (formatted with 2 decimals from minor units and the currency) and issue date.
@@ -76,7 +76,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-fe.md`. Contract: `plans/opena
   - Dependencies: FE-02, Q-P5
   - Verified by: TC-020 to TC-023, TC-032, TC-034
 
-- **FE-07 — Quote detail page**
+- [x] **FE-07 — Quote detail page**
   - Requirements: FR-01
   - Acceptance criteria:
     - Shows reference, title, version number with a "Current" label, line items (description, quantity, unit price, line total) and the version total; amounts have 2 decimals from integer minor units.
@@ -87,7 +87,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-fe.md`. Contract: `plans/opena
   - Dependencies: FE-02
   - Verified by: TC-040, TC-041, TC-044 to TC-047
 
-- **FE-10 — Not-found and error handling**
+- [x] **FE-10 — Not-found and error handling**
   - Requirements: FR-01, FR-03, FR-04
   - Acceptance criteria:
     - A 404 for a quote or version (unknown, malformed or another organisation's id) shows "Quote not found." with a link back to the list; the message and layout are identical for all three cases.
@@ -98,7 +98,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-fe.md`. Contract: `plans/opena
 
 ## F4 — Revisions
 
-- **FE-08 — Version navigation and superseded view**
+- [x] **FE-08 — Version navigation and superseded view**
   - Requirements: FR-01, FR-07
   - Acceptance criteria:
     - The quote page lists the available versions and links to each.
@@ -107,7 +107,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-fe.md`. Contract: `plans/opena
   - Dependencies: FE-07
   - Verified by: TC-042, TC-065
 
-- **FE-09 — Newer-version banner**
+- [x] **FE-09 — Newer-version banner**
   - Requirements: FR-07
   - Acceptance criteria:
     - While a quote is open, the app re-reads the quote on window refocus and every 60 s **[P interval]**, and compares `currentVersionNo` with the version on screen.

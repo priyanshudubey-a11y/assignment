@@ -1,0 +1,44 @@
+# QA-04: runs the ten-case regression pack on every build; any failing case fails the build.
+# ASSUMED start commands (backend: `npm start`, frontend: `npm run dev`) - adjust to the real package scripts.
+name: quote-portal-regression
+on: [push, pull_request]
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      BACKEND_URL: http://localhost:3001
+      FRONTEND_URL: http://localhost:5173
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install backend and frontend
+        run: |
+          (cd app/backend && npm ci)
+          (cd app/frontend && npm ci)
+      - name: Seed
+        run: cd app/backend && npm run seed
+      - name: Start backend and frontend
+        run: |
+          (cd app/backend && nohup npm start > ../backend.log 2>&1 &)
+          (cd app/frontend && nohup npm run dev -- --host 0.0.0.0 --port 5173 > ../frontend.log 2>&1 &)
+          for i in $(seq 1 60); do curl -fs http://localhost:3001/api/health && curl -fs http://localhost:5173 >/dev/null && exit 0; sleep 2; done
+          cat app/backend.log app/frontend.log; exit 1
+      - name: Install test tooling
+        run: |
+          cd app/tests
+          npm ci || npm install
+          npx playwright install --with-deps chromium
+      - name: Regression pack
+        run: cd app/tests && npm run test:regression
+      - name: Traceability check
+        run: cd app/tests && npm run trace
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: qa-report
+          path: |
+            app/tests/playwright-report
+            app/tests/test-results

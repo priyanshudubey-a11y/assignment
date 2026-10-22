@@ -18,7 +18,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - A sample test of each level runs green against the local build as a harness check; this is not a test-case run.
   - Dependencies: BE-01, BE-03, FE-01
 
-- **QA-02 — Seed reset and data-change helper**
+- [x] **QA-02 — Seed reset and data-change helper**
   - Requirements / test cases covered: TC-028, TC-060 to TC-062, TC-066, TC-069, TC-070
   - Acceptance criteria:
     - A helper resets the seed to the known state before and after any data-changing test.
@@ -26,7 +26,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - Data-changing tests can run in any order without affecting each other.
   - Dependencies: BE-03, BE-04, QA-01
 
-- **QA-03 — API test helpers**
+- [x] **QA-03 — API test helpers**
   - Requirements / test cases covered: FR-02, FR-04 (all API cases)
   - Acceptance criteria:
     - A login helper returns a session for a named seeded user and reuses it within a test file.
@@ -34,7 +34,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - A list-walker helper requests every page and returns the concatenated ids for pagination tests.
   - Dependencies: QA-01, BE-06
 
-- **QA-04 — Regression pack and CI job**
+- [x] **QA-04 — Regression pack and CI job**
   - Requirements / test cases covered: TC-009, TC-011, TC-016, TC-024, TC-025, TC-027, TC-051, TC-060, TC-069, TC-080
   - Acceptance criteria:
     - The ten regression cases are tagged `@regression` and run together with one command.
@@ -42,7 +42,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - The job is wired up in Session 4; the first recorded run is part of Session 5.
   - Dependencies: QA-01 and the automation tasks of the ten cases
 
-- **QA-05 — Scripted manual checklist and evidence template**
+- [x] **QA-05 — Scripted manual checklist and evidence template**
   - Requirements / test cases covered: TC-081, TC-082, TC-084, TC-092
   - Acceptance criteria:
     - A checklist file holds, for each of the four cases, the steps, the expected result from `docs/test-cases.md`, and where to store the evidence (screenshot, alert message, document link).
@@ -50,7 +50,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - TC-092 is marked blocked until the Figma link (OQ-16) exists; TC-084 is marked pending Q-P7.
   - Dependencies: none
 
-- **QA-06 — Traceability report**
+- [x] **QA-06 — Traceability report**
   - Requirements / test cases covered: all FR and NFR
   - Acceptance criteria:
     - Every automated test and checklist entry carries its test case id (for example `@TC-024`) and requirement ids as tags.
@@ -60,7 +60,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
 
 ## Login and redirects (FR-02)
 
-- **QA-T001 — Automate TC-001: Valid login lands on the quote list once**
+- [x] **QA-T001 — Automate TC-001: Valid login lands on the quote list once**
   - Test case / requirements: TC-001; FR-02; AC-001
   - Level: UI / E2E
   - Acceptance criteria:
@@ -69,7 +69,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - It drives the browser through accessible names or the `data-testid` hooks from the frontend tasks, with no fixed sleeps.
   - Dependencies: QA-01, BE-06, FE-03, FE-04
 
-- **QA-T002 — Automate TC-002: Email is matched case-insensitively**
+- [x] **QA-T002 — Automate TC-002: Email is matched case-insensitively**
   - Test case / requirements: TC-002; FR-02; AC-001
   - Level: API
   - Acceptance criteria:
@@ -77,7 +77,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - The test passes only when: login with an upper-case email succeeds.
   - Dependencies: QA-01, QA-03, BE-06
 
-- **QA-T003 — Automate TC-003: Double submit completes one login**
+- [x] **QA-T003 — Automate TC-003: Double submit completes one login**
   - Test case / requirements: TC-003; FR-02; AC-001
   - Level: UI / E2E
   - Acceptance criteria:
@@ -86,7 +86,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - It drives the browser through accessible names or the `data-testid` hooks from the frontend tasks, with no fixed sleeps.
   - Dependencies: QA-01, BE-06, FE-03
 
-- **QA-T004 — Automate TC-004: Wrong password stays on login**
+- [x] **QA-T004 — Automate TC-004: Wrong password stays on login**
   - Test case / requirements: TC-004; FR-02; AC-002
   - Level: UI / E2E
   - Acceptance criteria:
@@ -95,7 +95,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - It drives the browser through accessible names or the `data-testid` hooks from the frontend tasks, with no fixed sleeps.
   - Dependencies: QA-01, BE-06, FE-03
 
-- **QA-T005 — Automate TC-005: Unknown email response matches wrong password**
+- [x] **QA-T005 — Automate TC-005: Unknown email response matches wrong password**
   - Test case / requirements: TC-005; FR-02; AC-002
   - Level: API
   - Acceptance criteria:
@@ -103,7 +103,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - The test passes only when: same 401 status, body shape and message as TC-004.
   - Dependencies: QA-01, QA-03, BE-06
 
-- **QA-T006 — Automate TC-006: Empty fields are refused** — **pending**
+- [x] **QA-T006 — Automate TC-006: Empty fields are refused** — **pending**
   - Test case / requirements: TC-006; FR-02; AC-002
   - Level: UI / E2E
   - Acceptance criteria:
@@ -113,7 +113,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - The test is written against the proposed default and tagged `pending-decision` until the question is answered; it is not counted as ready until then.
   - Dependencies: QA-01, BE-06, FE-03, Q-P5
 
-- **QA-T007 — Automate TC-007: Malformed email is refused** — **pending**
+- [x] **QA-T007 — Automate TC-007: Malformed email is refused** — **pending**
   - Test case / requirements: TC-007; FR-02; AC-002
   - Level: UI / E2E
   - Acceptance criteria:
@@ -123,7 +123,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - The test is written against the proposed default and tagged `pending-decision` until the question is answered; it is not counted as ready until then.
   - Dependencies: QA-01, BE-06, FE-03, Q-P5
 
-- **QA-T008 — Automate TC-008: No lockout after repeated failures**
+- [x] **QA-T008 — Automate TC-008: No lockout after repeated failures**
   - Test case / requirements: TC-008; FR-02; AC-002
   - Level: API
   - Acceptance criteria:
@@ -131,7 +131,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - The test passes only when: 10 wrong passwords then the correct one succeeds on the 11th attempt.
   - Dependencies: QA-01, QA-03, BE-06
 
-- **QA-T009 — Automate TC-009: Deep link then login has no redirect loop** — regression pack
+- [x] **QA-T009 — Automate TC-009: Deep link then login has no redirect loop** — regression pack
   - Test case / requirements: TC-009; FR-02; AC-003
   - Level: UI / E2E
   - Acceptance criteria:
@@ -141,7 +141,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - It is tagged `@regression` and included in the QA-04 job.
   - Dependencies: QA-01, BE-06, BE-10, FE-02, FE-04
 
-- **QA-T010 — Automate TC-010: External redirect target is ignored**
+- [x] **QA-T010 — Automate TC-010: External redirect target is ignored**
   - Test case / requirements: TC-010; FR-02; AC-003
   - Level: UI / E2E
   - Acceptance criteria:
@@ -150,7 +150,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - It drives the browser through accessible names or the `data-testid` hooks from the frontend tasks, with no fixed sleeps.
   - Dependencies: QA-01, FE-04
 
-- **QA-T011 — Automate TC-011: Redirect target /login causes no loop** — regression pack
+- [x] **QA-T011 — Automate TC-011: Redirect target /login causes no loop** — regression pack
   - Test case / requirements: TC-011; FR-02; AC-003
   - Level: UI / E2E
   - Acceptance criteria:
@@ -160,7 +160,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - It is tagged `@regression` and included in the QA-04 job.
   - Dependencies: QA-01, FE-04
 
-- **QA-T012 — Automate TC-012: Deep link to another organisation's quote after login**
+- [x] **QA-T012 — Automate TC-012: Deep link to another organisation's quote after login**
   - Test case / requirements: TC-012; FR-02, FR-04; AC-003
   - Level: UI / E2E
   - Acceptance criteria:
@@ -169,7 +169,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - It drives the browser through accessible names or the `data-testid` hooks from the frontend tasks, with no fixed sleeps.
   - Dependencies: QA-01, BE-10, FE-04, FE-10
 
-- **QA-T013 — Automate TC-013: Signed-in user opening the login page** — **pending**
+- [x] **QA-T013 — Automate TC-013: Signed-in user opening the login page** — **pending**
   - Test case / requirements: TC-013; FR-02; AC-001
   - Level: UI / E2E
   - Acceptance criteria:
@@ -181,7 +181,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
 
 ## Logout and access control (FR-06, FR-02, FR-04)
 
-- **QA-T014 — Automate TC-014: Logout ends the session**
+- [x] **QA-T014 — Automate TC-014: Logout ends the session**
   - Test case / requirements: TC-014; FR-06; none (G-01)
   - Level: UI / E2E
   - Acceptance criteria:
@@ -190,7 +190,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - It drives the browser through accessible names or the `data-testid` hooks from the frontend tasks, with no fixed sleeps.
   - Dependencies: QA-01, BE-07, FE-05
 
-- **QA-T015 — Automate TC-015: Back button after logout shows no data**
+- [x] **QA-T015 — Automate TC-015: Back button after logout shows no data**
   - Test case / requirements: TC-015; FR-06; none (G-01)
   - Level: UI / E2E
   - Acceptance criteria:
@@ -199,7 +199,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - It drives the browser through accessible names or the `data-testid` hooks from the frontend tasks, with no fixed sleeps.
   - Dependencies: QA-01, BE-07, FE-05
 
-- **QA-T016 — Automate TC-016: Protected endpoints deny anonymous access** — regression pack
+- [x] **QA-T016 — Automate TC-016: Protected endpoints deny anonymous access** — regression pack
   - Test case / requirements: TC-016; FR-02, FR-04; AC-009
   - Level: API
   - Acceptance criteria:
@@ -208,7 +208,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - It is tagged `@regression` and included in the QA-04 job.
   - Dependencies: QA-01, QA-03, BE-08
 
-- **QA-T017 — Automate TC-017: Invalid session sends user to login with return path**
+- [x] **QA-T017 — Automate TC-017: Invalid session sends user to login with return path**
   - Test case / requirements: TC-017; FR-01, FR-02; AC-008
   - Level: UI / E2E
   - Acceptance criteria:
@@ -219,7 +219,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
 
 ## Quote list and pagination (FR-03)
 
-- **QA-T020 — Automate TC-020: Zero quotes shows the empty state** — **pending**
+- [x] **QA-T020 — Automate TC-020: Zero quotes shows the empty state** — **pending**
   - Test case / requirements: TC-020; FR-03; AC-006
   - Level: UI / E2E
   - Acceptance criteria:
@@ -229,7 +229,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - The test is written against the proposed default and tagged `pending-decision` until the question is answered; it is not counted as ready until then.
   - Dependencies: QA-01, BE-09, FE-06, Q-P5
 
-- **QA-T021 — Automate TC-021: Exactly one quote**
+- [x] **QA-T021 — Automate TC-021: Exactly one quote**
   - Test case / requirements: TC-021; FR-03; AC-005
   - Level: UI / E2E
   - Acceptance criteria:
@@ -238,7 +238,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - It drives the browser through accessible names or the `data-testid` hooks from the frontend tasks, with no fixed sleeps.
   - Dependencies: QA-01, BE-09, FE-06
 
-- **QA-T022 — Automate TC-022: Exactly 50 quotes with pageSize=50**
+- [x] **QA-T022 — Automate TC-022: Exactly 50 quotes with pageSize=50**
   - Test case / requirements: TC-022; FR-03; AC-005
   - Level: API
   - Acceptance criteria:
@@ -246,7 +246,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - The test passes only when: 50 rows; total=50; totalPages=1; no second page.
   - Dependencies: QA-01, QA-03, BE-09
 
-- **QA-T023 — Automate TC-023: 50 quotes at default page size**
+- [x] **QA-T023 — Automate TC-023: 50 quotes at default page size**
   - Test case / requirements: TC-023; FR-03; AC-005
   - Level: API
   - Acceptance criteria:
@@ -254,7 +254,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - The test passes only when: totalPages=3; sizes 20/20/10; 50 distinct ids.
   - Dependencies: QA-01, QA-03, BE-09
 
-- **QA-T024 — Automate TC-024: 51 quotes with pageSize=50 (the >50 rows bug)** — regression pack
+- [x] **QA-T024 — Automate TC-024: 51 quotes with pageSize=50 (the >50 rows bug)** — regression pack
   - Test case / requirements: TC-024; FR-03; AC-004
   - Level: API
   - Acceptance criteria:
@@ -263,7 +263,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - It is tagged `@regression` and included in the QA-04 job.
   - Dependencies: QA-01, QA-03, BE-09
 
-- **QA-T025 — Automate TC-025: 51 or more quotes at default page size** — regression pack
+- [x] **QA-T025 — Automate TC-025: 51 or more quotes at default page size** — regression pack
   - Test case / requirements: TC-025; FR-03; AC-004
   - Level: API
   - Acceptance criteria:
@@ -272,7 +272,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - It is tagged `@regression` and included in the QA-04 job.
   - Dependencies: QA-01, QA-03, BE-09
 
-- **QA-T026 — Automate TC-026: pageSize=1 walked twice gives the same order**
+- [x] **QA-T026 — Automate TC-026: pageSize=1 walked twice gives the same order**
   - Test case / requirements: TC-026; FR-03; AC-004
   - Level: API
   - Acceptance criteria:
@@ -280,7 +280,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - The test passes only when: 51 pages; identical id sequence in both walks.
   - Dependencies: QA-01, QA-03, BE-09
 
-- **QA-T027 — Automate TC-027: Identical sort timestamps are not duplicated or skipped** — regression pack
+- [x] **QA-T027 — Automate TC-027: Identical sort timestamps are not duplicated or skipped** — regression pack
   - Test case / requirements: TC-027; FR-03; AC-004
   - Level: API
   - Acceptance criteria:
@@ -289,7 +289,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - It is tagged `@regression` and included in the QA-04 job.
   - Dependencies: QA-01, QA-03, BE-09, BE-03
 
-- **QA-T028 — Automate TC-028: Revision while paging through the list** — **pending**
+- [x] **QA-T028 — Automate TC-028: Revision while paging through the list** — **pending**
   - Test case / requirements: TC-028; FR-03; AC-004
   - Level: API
   - Acceptance criteria:
@@ -298,7 +298,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - The test is written against the proposed default and tagged `pending-decision` until the question is answered; it is not counted as ready until then.
   - Dependencies: QA-01, QA-03, QA-02, BE-04, BE-09, Q-P3
 
-- **QA-T029 — Automate TC-029: Invalid page number is rejected**
+- [x] **QA-T029 — Automate TC-029: Invalid page number is rejected**
   - Test case / requirements: TC-029; FR-03; AC-004
   - Level: API
   - Acceptance criteria:
@@ -306,7 +306,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - The test passes only when: HTTP 400 with JSON {code, message} for page=0, -1 and abc; no stack trace.
   - Dependencies: QA-01, QA-03, BE-09
 
-- **QA-T030 — Automate TC-030: Invalid page size is rejected** — **pending**
+- [x] **QA-T030 — Automate TC-030: Invalid page size is rejected** — **pending**
   - Test case / requirements: TC-030; FR-03; AC-004
   - Level: API
   - Acceptance criteria:
@@ -315,7 +315,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - The test is written against the proposed default and tagged `pending-decision` until the question is answered; it is not counted as ready until then.
   - Dependencies: QA-01, QA-03, BE-09, Q-P5
 
-- **QA-T031 — Automate TC-031: Page beyond the last page** — **pending**
+- [x] **QA-T031 — Automate TC-031: Page beyond the last page** — **pending**
   - Test case / requirements: TC-031; FR-03; AC-004
   - Level: API
   - Acceptance criteria:
@@ -324,7 +324,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - The test is written against the proposed default and tagged `pending-decision` until the question is answered; it is not counted as ready until then.
   - Dependencies: QA-01, QA-03, BE-09, Q-P5
 
-- **QA-T032 — Automate TC-032: List error state is not an empty state**
+- [x] **QA-T032 — Automate TC-032: List error state is not an empty state**
   - Test case / requirements: TC-032; FR-03; none (G-05)
   - Level: UI / E2E
   - Acceptance criteria:
@@ -333,7 +333,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - It drives the browser through accessible names or the `data-testid` hooks from the frontend tasks, with no fixed sleeps.
   - Dependencies: QA-01, BE-09, FE-06
 
-- **QA-T033 — Automate TC-033: Unsupported sort value is rejected**
+- [x] **QA-T033 — Automate TC-033: Unsupported sort value is rejected**
   - Test case / requirements: TC-033; FR-03; AC-004
   - Level: API
   - Acceptance criteria:
@@ -341,7 +341,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - The test passes only when: HTTP 400 for sort=password:asc; no data exposure change.
   - Dependencies: QA-01, QA-03, BE-09
 
-- **QA-T034 — Automate TC-034: List never contains another organisation's quotes**
+- [x] **QA-T034 — Automate TC-034: List never contains another organisation's quotes**
   - Test case / requirements: TC-034; FR-03, FR-04; AC-009
   - Level: API
   - Acceptance criteria:
@@ -351,7 +351,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
 
 ## Quote view (FR-01)
 
-- **QA-T040 — Automate TC-040: Current version is shown and labelled**
+- [x] **QA-T040 — Automate TC-040: Current version is shown and labelled**
   - Test case / requirements: TC-040; FR-01; AC-007
   - Level: UI / E2E
   - Acceptance criteria:
@@ -360,7 +360,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - It drives the browser through accessible names or the `data-testid` hooks from the frontend tasks, with no fixed sleeps.
   - Dependencies: QA-01, BE-10, FE-07
 
-- **QA-T041 — Automate TC-041: Single-version quote has no banner**
+- [x] **QA-T041 — Automate TC-041: Single-version quote has no banner**
   - Test case / requirements: TC-041; FR-01; AC-007
   - Level: UI / E2E
   - Acceptance criteria:
@@ -369,7 +369,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - It drives the browser through accessible names or the `data-testid` hooks from the frontend tasks, with no fixed sleeps.
   - Dependencies: QA-01, BE-10, FE-07
 
-- **QA-T042 — Automate TC-042: Superseded version is labelled and read-only**
+- [x] **QA-T042 — Automate TC-042: Superseded version is labelled and read-only**
   - Test case / requirements: TC-042; FR-01, FR-07; AC-007
   - Level: UI / E2E
   - Acceptance criteria:
@@ -378,7 +378,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - It drives the browser through accessible names or the `data-testid` hooks from the frontend tasks, with no fixed sleeps.
   - Dependencies: QA-01, BE-11, FE-08
 
-- **QA-T043 — Automate TC-043: Each seeded quote has exactly one current version**
+- [x] **QA-T043 — Automate TC-043: Each seeded quote has exactly one current version**
   - Test case / requirements: TC-043; FR-01; AC-007
   - Level: API
   - Acceptance criteria:
@@ -386,7 +386,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - The test passes only when: exactly one current version per quote; version numbers consecutive from 1.
   - Dependencies: QA-01, QA-03, BE-03
 
-- **QA-T044 — Automate TC-044: Quote with no line items renders** — **pending**
+- [x] **QA-T044 — Automate TC-044: Quote with no line items renders** — **pending**
   - Test case / requirements: TC-044; FR-01; AC-007
   - Level: UI / E2E
   - Acceptance criteria:
@@ -396,7 +396,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - The test is written against the proposed default and tagged `pending-decision` until the question is answered; it is not counted as ready until then.
   - Dependencies: QA-01, BE-10, FE-07, Q-P5
 
-- **QA-T045 — Automate TC-045: Line and version amounts are consistent**
+- [x] **QA-T045 — Automate TC-045: Line and version amounts are consistent**
   - Test case / requirements: TC-045; FR-01; AC-007
   - Level: Unit
   - Acceptance criteria:
@@ -404,7 +404,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - The test passes only when: line total = quantity x unit price; version total = sum of line totals; 2-decimal format from minor units.
   - Dependencies: QA-01, BE-02, BE-03, FE-07
 
-- **QA-T046 — Automate TC-046: Data-source failure shows a retryable error**
+- [x] **QA-T046 — Automate TC-046: Data-source failure shows a retryable error**
   - Test case / requirements: TC-046; FR-01; AC-008
   - Level: UI / E2E
   - Acceptance criteria:
@@ -413,7 +413,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - It drives the browser through accessible names or the `data-testid` hooks from the frontend tasks, with no fixed sleeps.
   - Dependencies: QA-01, BE-10, FE-07
 
-- **QA-T047 — Automate TC-047: Slow response shows loading, never a false not-found**
+- [x] **QA-T047 — Automate TC-047: Slow response shows loading, never a false not-found**
   - Test case / requirements: TC-047; FR-01; AC-008
   - Level: UI / E2E
   - Acceptance criteria:
@@ -422,7 +422,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - It drives the browser through accessible names or the `data-testid` hooks from the frontend tasks, with no fixed sleeps.
   - Dependencies: QA-01, FE-07
 
-- **QA-T048 — Automate TC-048: Invalid quote id shows not found**
+- [x] **QA-T048 — Automate TC-048: Invalid quote id shows not found**
   - Test case / requirements: TC-048; FR-01; AC-007
   - Level: UI / E2E
   - Acceptance criteria:
@@ -433,7 +433,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
 
 ## Data isolation (FR-04)
 
-- **QA-T050 — Automate TC-050: Another organisation's quote URL is not found**
+- [x] **QA-T050 — Automate TC-050: Another organisation's quote URL is not found**
   - Test case / requirements: TC-050; FR-04; AC-009
   - Level: UI / E2E
   - Acceptance criteria:
@@ -442,7 +442,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - It drives the browser through accessible names or the `data-testid` hooks from the frontend tasks, with no fixed sleeps.
   - Dependencies: QA-01, BE-10, FE-10
 
-- **QA-T051 — Automate TC-051: Other-organisation and non-existent ids are indistinguishable** — regression pack
+- [x] **QA-T051 — Automate TC-051: Other-organisation and non-existent ids are indistinguishable** — regression pack
   - Test case / requirements: TC-051; FR-04; AC-009
   - Level: API
   - Acceptance criteria:
@@ -451,7 +451,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - It is tagged `@regression` and included in the QA-04 job.
   - Dependencies: QA-01, QA-03, BE-10
 
-- **QA-T052 — Automate TC-052: Versions endpoint hides other organisations**
+- [x] **QA-T052 — Automate TC-052: Versions endpoint hides other organisations**
   - Test case / requirements: TC-052; FR-04; AC-009
   - Level: API
   - Acceptance criteria:
@@ -459,7 +459,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - The test passes only when: 404, same as a non-existent version.
   - Dependencies: QA-01, QA-03, BE-11
 
-- **QA-T053 — Automate TC-053: Probing neighbouring ids resolves only own quotes**
+- [x] **QA-T053 — Automate TC-053: Probing neighbouring ids resolves only own quotes**
   - Test case / requirements: TC-053; FR-04; AC-009
   - Level: API
   - Acceptance criteria:
@@ -467,7 +467,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - The test passes only when: only ORG-51 quotes return 200.
   - Dependencies: QA-01, QA-03, BE-10
 
-- **QA-T054 — Automate TC-054: Organisation B sees only its own quotes**
+- [x] **QA-T054 — Automate TC-054: Organisation B sees only its own quotes**
   - Test case / requirements: TC-054; FR-04; AC-009
   - Level: UI / E2E
   - Acceptance criteria:
@@ -476,7 +476,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - It drives the browser through accessible names or the `data-testid` hooks from the frontend tasks, with no fixed sleeps.
   - Dependencies: QA-01, BE-09, FE-06, FE-10
 
-- **QA-T055 — Automate TC-055: Client-supplied organisation data is ignored**
+- [x] **QA-T055 — Automate TC-055: Client-supplied organisation data is ignored**
   - Test case / requirements: TC-055; FR-04; AC-009
   - Level: API
   - Acceptance criteria:
@@ -486,7 +486,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
 
 ## Newer-version notice (FR-07)
 
-- **QA-T060 — Automate TC-060: Banner appears within the polling interval** — regression pack
+- [x] **QA-T060 — Automate TC-060: Banner appears within the polling interval** — regression pack
   - Test case / requirements: TC-060; FR-07; AC-012
   - Level: UI / E2E
   - Acceptance criteria:
@@ -496,7 +496,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - It is tagged `@regression` and included in the QA-04 job.
   - Dependencies: QA-01, QA-02, BE-04, FE-09
 
-- **QA-T061 — Automate TC-061: Banner appears promptly on refocus**
+- [x] **QA-T061 — Automate TC-061: Banner appears promptly on refocus**
   - Test case / requirements: TC-061; FR-07; AC-012
   - Level: UI / E2E
   - Acceptance criteria:
@@ -505,7 +505,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - It drives the browser through accessible names or the `data-testid` hooks from the frontend tasks, with no fixed sleeps.
   - Dependencies: QA-01, QA-02, BE-04, FE-09
 
-- **QA-T062 — Automate TC-062: Two revisions link to the latest version**
+- [x] **QA-T062 — Automate TC-062: Two revisions link to the latest version**
   - Test case / requirements: TC-062; FR-07; AC-012
   - Level: UI / E2E
   - Acceptance criteria:
@@ -514,7 +514,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - It drives the browser through accessible names or the `data-testid` hooks from the frontend tasks, with no fixed sleeps.
   - Dependencies: QA-01, QA-02, BE-04, FE-09
 
-- **QA-T063 — Automate TC-063: No false banner when nothing changes**
+- [x] **QA-T063 — Automate TC-063: No false banner when nothing changes**
   - Test case / requirements: TC-063; FR-07; AC-012
   - Level: UI / E2E
   - Acceptance criteria:
@@ -523,7 +523,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - It drives the browser through accessible names or the `data-testid` hooks from the frontend tasks, with no fixed sleeps.
   - Dependencies: QA-01, FE-09
 
-- **QA-T064 — Automate TC-064: Following the banner link shows the current version**
+- [x] **QA-T064 — Automate TC-064: Following the banner link shows the current version**
   - Test case / requirements: TC-064; FR-07; AC-012
   - Level: UI / E2E
   - Acceptance criteria:
@@ -532,7 +532,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - It drives the browser through accessible names or the `data-testid` hooks from the frontend tasks, with no fixed sleeps.
   - Dependencies: QA-01, FE-08, FE-09
 
-- **QA-T065 — Automate TC-065: Banner shows on load for a superseded version**
+- [x] **QA-T065 — Automate TC-065: Banner shows on load for a superseded version**
   - Test case / requirements: TC-065; FR-07; AC-012
   - Level: UI / E2E
   - Acceptance criteria:
@@ -541,7 +541,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - It drives the browser through accessible names or the `data-testid` hooks from the frontend tasks, with no fixed sleeps.
   - Dependencies: QA-01, FE-08, FE-09
 
-- **QA-T066 — Automate TC-066: Revision between list load and open**
+- [x] **QA-T066 — Automate TC-066: Revision between list load and open**
   - Test case / requirements: TC-066; FR-07; AC-012
   - Level: UI / E2E
   - Acceptance criteria:
@@ -550,7 +550,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - It drives the browser through accessible names or the `data-testid` hooks from the frontend tasks, with no fixed sleeps.
   - Dependencies: QA-01, QA-02, BE-04, BE-10, FE-07
 
-- **QA-T067 — Automate TC-067: Network drop during polling**
+- [x] **QA-T067 — Automate TC-067: Network drop during polling**
   - Test case / requirements: TC-067; FR-07; AC-012
   - Level: UI / E2E
   - Acceptance criteria:
@@ -559,7 +559,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - It drives the browser through accessible names or the `data-testid` hooks from the frontend tasks, with no fixed sleeps.
   - Dependencies: QA-01, FE-09
 
-- **QA-T068 — Automate TC-068: Banner is announced to screen readers**
+- [x] **QA-T068 — Automate TC-068: Banner is announced to screen readers**
   - Test case / requirements: TC-068; FR-07; AC-012
   - Level: UI / E2E
   - Acceptance criteria:
@@ -570,7 +570,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
 
 ## Mock data and seed (FR-08)
 
-- **QA-T069 — Automate TC-069: seed:revise issues a new current version** — regression pack
+- [x] **QA-T069 — Automate TC-069: seed:revise issues a new current version** — regression pack
   - Test case / requirements: TC-069; FR-08; AC-014
   - Level: Unit
   - Acceptance criteria:
@@ -579,7 +579,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - It is tagged `@regression` and included in the QA-04 job.
   - Dependencies: QA-01, QA-02, BE-04
 
-- **QA-T070 — Automate TC-070: Parallel seed:revise runs stay consistent**
+- [x] **QA-T070 — Automate TC-070: Parallel seed:revise runs stay consistent**
   - Test case / requirements: TC-070; FR-08; AC-014
   - Level: API
   - Acceptance criteria:
@@ -587,7 +587,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - The test passes only when: versions 2 and 3 exist; no duplicate version number; exactly one current.
   - Dependencies: QA-01, QA-03, QA-02, BE-04
 
-- **QA-T071 — Automate TC-071: seed:revise with an unknown quote fails cleanly**
+- [x] **QA-T071 — Automate TC-071: seed:revise with an unknown quote fails cleanly**
   - Test case / requirements: TC-071; FR-08; AC-014
   - Level: Unit
   - Acceptance criteria:
@@ -595,7 +595,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - The test passes only when: non-zero exit; clear error; no data changed.
   - Dependencies: QA-01, BE-04
 
-- **QA-T072 — Automate TC-072: Seed produces all required shapes** — **pending**
+- [x] **QA-T072 — Automate TC-072: Seed produces all required shapes** — **pending**
   - Test case / requirements: TC-072; FR-08; AC-013
   - Level: API
   - Acceptance criteria:
@@ -604,7 +604,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - The test is written against the proposed default and tagged `pending-decision` until the question is answered; it is not counted as ready until then.
   - Dependencies: QA-01, QA-03, BE-03, Q-P4
 
-- **QA-T073 — Automate TC-073: Running the seed twice does not duplicate data** — **pending**
+- [x] **QA-T073 — Automate TC-073: Running the seed twice does not duplicate data** — **pending**
   - Test case / requirements: TC-073; FR-08; AC-013
   - Level: API
   - Acceptance criteria:
@@ -615,7 +615,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
 
 ## Beta, monitoring and operations (FR-05, NFR-01)
 
-- **QA-T080 — Automate TC-080: Health endpoint reports healthy** — regression pack
+- [x] **QA-T080 — Automate TC-080: Health endpoint reports healthy** — regression pack
   - Test case / requirements: TC-080; NFR-01; AC-010
   - Level: API
   - Acceptance criteria:
@@ -624,7 +624,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - It is tagged `@regression` and included in the QA-04 job.
   - Dependencies: QA-01, QA-03, BE-12
 
-- **QA-T081 — Automate TC-081: Alert after consecutive failed checks**
+- [x] **QA-T081 — Automate TC-081: Alert after consecutive failed checks**
   - Test case / requirements: TC-081; NFR-01; AC-010
   - Level: Scripted manual / ops
   - Acceptance criteria:
@@ -632,7 +632,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - The check is scripted as far as the tools allow (for example a command that stops the backend); the evidence and the pass or fail call are recorded by a person in Session 5.
   - Dependencies: QA-05, BE-15, QA-05, Q-P2
 
-- **QA-T082 — Automate TC-082: Single failed check raises no alert**
+- [x] **QA-T082 — Automate TC-082: Single failed check raises no alert**
   - Test case / requirements: TC-082; NFR-01; AC-010
   - Level: Scripted manual / ops
   - Acceptance criteria:
@@ -640,7 +640,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - The check is scripted as far as the tools allow (for example a command that stops the backend); the evidence and the pass or fail call are recorded by a person in Session 5.
   - Dependencies: QA-05, BE-15, QA-05
 
-- **QA-T083 — Automate TC-083: Staging smoke test**
+- [x] **QA-T083 — Automate TC-083: Staging smoke test**
   - Test case / requirements: TC-083; FR-05; none (G-08)
   - Level: UI / E2E
   - Acceptance criteria:
@@ -649,7 +649,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - It drives the browser through accessible names or the `data-testid` hooks from the frontend tasks, with no fixed sleeps.
   - Dependencies: QA-01, BE-14, FE-12
 
-- **QA-T084 — Automate TC-084: Acme beta feedback is recorded by the deadline** — **pending**
+- [x] **QA-T084 — Automate TC-084: Acme beta feedback is recorded by the deadline** — **pending**
   - Test case / requirements: TC-084; FR-05; AC-011
   - Level: Scripted manual / ops
   - Acceptance criteria:
@@ -660,7 +660,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
 
 ## Non-functional (NFR-02 baseline, NFR-03, spec NFR-04)
 
-- **QA-T090 — Automate TC-090: Automated accessibility scan**
+- [x] **QA-T090 — Automate TC-090: Automated accessibility scan**
   - Test case / requirements: TC-090; NFR-03; none
   - Level: UI / E2E
   - Acceptance criteria:
@@ -669,7 +669,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - It drives the browser through accessible names or the `data-testid` hooks from the frontend tasks, with no fixed sleeps.
   - Dependencies: QA-01, FE-11
 
-- **QA-T091 — Automate TC-091: Keyboard-only use**
+- [x] **QA-T091 — Automate TC-091: Keyboard-only use**
   - Test case / requirements: TC-091; NFR-03; none
   - Level: UI / E2E
   - Acceptance criteria:
@@ -678,7 +678,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - It drives the browser through accessible names or the `data-testid` hooks from the frontend tasks, with no fixed sleeps.
   - Dependencies: QA-01, FE-11
 
-- **QA-T092 — Automate TC-092: Spacing matches the final designs** — **blocked**
+- [x] **QA-T092 — Automate TC-092: Spacing matches the final designs** — **blocked**
   - Test case / requirements: TC-092; NFR-03; none
   - Level: Scripted manual / ops
   - Acceptance criteria:
@@ -687,7 +687,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - The test is a placeholder tagged `blocked` until the dependency exists.
   - Dependencies: QA-05, FE-11, QA-05, OQ-16
 
-- **QA-T093 — Automate TC-093: List performance at 10,000 quotes** — **pending**
+- [x] **QA-T093 — Automate TC-093: List performance at 10,000 quotes** — **pending**
   - Test case / requirements: TC-093; spec NFR-04 (list performance); none (G-03)
   - Level: Performance
   - Acceptance criteria:
@@ -697,7 +697,7 @@ Status: Draft v0.1 (Session 3). Plan: `plans/plan-qa.md`. Test cases: `docs/test
     - The test is written against the proposed default and tagged `pending-decision` until the question is answered; it is not counted as ready until then.
   - Dependencies: QA-01, BE-16, Q-P6
 
-- **QA-T094 — Automate TC-094: Baseline security hygiene**
+- [x] **QA-T094 — Automate TC-094: Baseline security hygiene**
   - Test case / requirements: TC-094; NFR-02 (baseline hygiene); none (G-04)
   - Level: API
   - Acceptance criteria:
