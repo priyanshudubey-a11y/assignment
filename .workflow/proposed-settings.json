@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .workflow/launch-next.js",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

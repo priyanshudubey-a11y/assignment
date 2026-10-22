@@ -1,0 +1,486 @@
+openapi: 3.0.3
+info:
+  title: Quote Portal API — Phase 1
+  version: 0.1.0
+  description: |
+    API contract for Quote Portal Phase 1 (customer-facing quote view).
+    Source: docs/requirements.md v0.2 and docs/spec.md v0.2. Requirement IDs (FR-xx, NFR-xx) are noted per operation.
+
+    Conventions
+    - All endpoints are under /api and return JSON. Errors use the shape {code, message}; stack traces are never returned.
+    - Authentication is a server-side session carried in an httpOnly cookie (qp_session). SSO is out of scope.
+    - Every quote query is scoped to the caller's organisation. A quote or version that belongs to another organisation is indistinguishable from one that does not exist (404 NOT_FOUND).
+    - Money is returned as integer minor units (for example cents) plus an ISO 4217 currency code.
+    - The organisation is always taken from the session, never from client input.
+
+    Items marked [P] are proposals that need confirmation; they are listed in plans/plan-be.md section "Open questions".
+servers:
+  - url: /
+    description: Same origin as the web app (local, staging)
+tags:
+  - name: Auth
+  - name: Quotes
+  - name: Ops
+security:
+  - cookieAuth: []
+paths:
+  /api/auth/login:
+    post:
+      tags: [Auth]
+      operationId: login
+      summary: Sign in with email and password (FR-02)
+      description: |
+        Creates a session and sets the session cookie. The response for an unknown email and for a wrong password is identical (same status, body shape and message) so accounts cannot be enumerated.
+        No lockout and no session timeout in Phase 1 (decision Q5=C).
+        The post-login redirect (the `next` target) is handled by the web app, not by this endpoint.
+        Email is matched case-insensitively.
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Signed in. The session cookie is set.
+          headers:
+            Set-Cookie:
+              description: Session cookie (httpOnly; Secure on HTTPS; SameSite=Lax [P]).
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '401':
+          description: Wrong credentials, unknown email or inactive account. Always the same body.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: INVALID_CREDENTIALS
+                message: Incorrect email or password.
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /api/auth/logout:
+    post:
+      tags: [Auth]
+      operationId: logout
+      summary: End the current session (FR-06)
+      description: Idempotent. Returns 204 whether or not a session existed [P]. The session cookie is cleared.
+      security: []
+      responses:
+        '204':
+          description: Session ended.
+          headers:
+            Set-Cookie:
+              description: Clears the session cookie.
+              schema:
+                type: string
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /api/me:
+    get:
+      tags: [Auth]
+      operationId: getMe
+      summary: Current user (FR-02)
+      description: Used by the web app to bootstrap the session and to detect an expired or invalid session.
+      responses:
+        '200':
+          description: The signed-in user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '401':
+          $ref: '#/components/responses/Unauthenticated'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /api/quotes:
+    get:
+      tags: [Quotes]
+      operationId: listQuotes
+      summary: List the organisation's quotes, paginated (FR-03, FR-04)
+      description: |
+        Offset pagination with a deterministic order: the requested sort field, then id descending as the tiebreak, so no row is duplicated or skipped between pages.
+        Must work for 0, 1, 50, 51 and many rows (the known defect is pagination above 50 rows).
+        A page beyond the last page returns 200 with an empty items array [P]. totalPages is 0 when total is 0 [P].
+        The sort field issued_at is the date the quote was first issued (version 1), so a new revision does not reorder the list [P, see plan-be open question Q-P3].
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - name: pageSize
+          in: query
+          required: false
+          description: Rows per page. Maximum 100 [P].
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+        - name: sort
+          in: query
+          required: false
+          description: Allowed values only; anything else is a 400.
+          schema:
+            type: string
+            enum: ['issued_at:desc', 'issued_at:asc', 'reference:asc', 'reference:desc']
+            default: 'issued_at:desc'
+      responses:
+        '200':
+          description: One page of quotes.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteListResponse'
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '401':
+          $ref: '#/components/responses/Unauthenticated'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /api/quotes/{id}:
+    get:
+      tags: [Quotes]
+      operationId: getQuote
+      summary: A quote with its current version and version history (FR-01, FR-04, FR-07)
+      description: |
+        The web app re-reads this endpoint on window refocus and every 60 s [P interval] and compares currentVersionNo with the version on screen to show the newer-version banner (FR-07).
+        An id that is unknown, malformed or belongs to another organisation returns the same 404.
+      parameters:
+        - $ref: '#/components/parameters/QuoteId'
+      responses:
+        '200':
+          description: The quote.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteDetailResponse'
+        '401':
+          $ref: '#/components/responses/Unauthenticated'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /api/quotes/{id}/versions/{versionNo}:
+    get:
+      tags: [Quotes]
+      operationId: getQuoteVersion
+      summary: A specific version of a quote, read-only (FR-01, FR-04, FR-07)
+      description: |
+        Older versions are returned with superseded=true and are read-only. currentVersionNo is included so the web app can link a superseded version to the current one without a second call [P, additive to spec.md].
+        An unknown quote, another organisation's quote, or a version number that does not exist returns the same 404.
+      parameters:
+        - $ref: '#/components/parameters/QuoteId'
+        - name: versionNo
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        '200':
+          description: The version.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteVersionResponse'
+        '401':
+          $ref: '#/components/responses/Unauthenticated'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /api/health:
+    get:
+      tags: [Ops]
+      operationId: getHealth
+      summary: Health check for uptime monitoring (NFR-01)
+      description: |
+        No authentication. Returns no sensitive data. 200 when the app and its database are reachable; 503 otherwise [P], so the monitor can alert after 2 consecutive failures [P threshold].
+      security: []
+      responses:
+        '200':
+          description: Healthy.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Health'
+              example:
+                status: ok
+        '503':
+          description: Unhealthy (for example the database is unreachable).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Health'
+              example:
+                status: unavailable
+components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: qp_session
+      description: Opaque server-side session id. httpOnly; Secure on HTTPS [P name].
+  parameters:
+    QuoteId:
+      name: id
+      in: path
+      required: true
+      description: Quote id (opaque string). Any value that does not resolve inside the caller's organisation is a 404, including malformed values.
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 128
+  responses:
+    ValidationError:
+      description: Invalid input (for example page=0, pageSize above the maximum, an unsupported sort value, a missing or malformed email).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: VALIDATION_ERROR
+            message: Could not load quotes. Try again.
+    Unauthenticated:
+      description: No valid session.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: UNAUTHENTICATED
+            message: Sign in to continue.
+    NotFound:
+      description: Not found, or belongs to another organisation (indistinguishable).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: NOT_FOUND
+            message: Quote not found.
+    InternalError:
+      description: Unexpected server or data-source failure. No stack trace or internal detail in the body.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: INTERNAL_ERROR
+            message: Something went wrong. Try again.
+  schemas:
+    Error:
+      type: object
+      required: [code, message]
+      properties:
+        code:
+          type: string
+          enum: [VALIDATION_ERROR, INVALID_CREDENTIALS, UNAUTHENTICATED, NOT_FOUND, INTERNAL_ERROR]
+        message:
+          type: string
+        details:
+          type: array
+          description: Optional field-level messages for VALIDATION_ERROR [P]. Never present for INVALID_CREDENTIALS.
+          items:
+            type: object
+            required: [field, message]
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+    LoginRequest:
+      type: object
+      required: [email, password]
+      properties:
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        password:
+          type: string
+          minLength: 1
+          maxLength: 256
+    User:
+      type: object
+      required: [id, email, role, organisation]
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+          format: email
+        role:
+          type: string
+          enum: [customer]
+        organisation:
+          $ref: '#/components/schemas/Organisation'
+    Organisation:
+      type: object
+      required: [id, name]
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    LoginResponse:
+      type: object
+      required: [user]
+      properties:
+        user:
+          $ref: '#/components/schemas/User'
+    Money:
+      type: integer
+      minimum: 0
+      description: Amount in minor units (for example cents). Format on screen with 2 decimals.
+    Currency:
+      type: string
+      pattern: '^[A-Z]{3}$'
+      description: ISO 4217 code.
+    QuoteSummary:
+      type: object
+      required: [id, reference, title, status, currentVersionNo, currency, total, issuedAt]
+      properties:
+        id:
+          type: string
+        reference:
+          type: string
+          description: Unique human-readable reference.
+        title:
+          type: string
+        status:
+          type: string
+          description: Quote status. Allowed values are not defined in the requirements (OQ-07) [P].
+        currentVersionNo:
+          type: integer
+          minimum: 1
+        currency:
+          $ref: '#/components/schemas/Currency'
+        total:
+          $ref: '#/components/schemas/Money'
+        issuedAt:
+          type: string
+          format: date-time
+          description: When the quote was first issued (version 1) [P].
+    QuoteListResponse:
+      type: object
+      required: [items, page, pageSize, total, totalPages]
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuoteSummary'
+        page:
+          type: integer
+          minimum: 1
+        pageSize:
+          type: integer
+          minimum: 1
+        total:
+          type: integer
+          minimum: 0
+          description: Number of quotes in the caller's organisation.
+        totalPages:
+          type: integer
+          minimum: 0
+          description: ceil(total / pageSize); 0 when total is 0 [P].
+    LineItem:
+      type: object
+      required: [id, description, qty, unitPrice, lineTotal]
+      properties:
+        id:
+          type: string
+        description:
+          type: string
+        qty:
+          type: integer
+          minimum: 1
+        unitPrice:
+          $ref: '#/components/schemas/Money'
+        lineTotal:
+          $ref: '#/components/schemas/Money'
+          description: Equals qty x unitPrice.
+    VersionSummary:
+      type: object
+      required: [versionNo, isCurrent, issuedAt, supersededAt, currency, total]
+      properties:
+        versionNo:
+          type: integer
+          minimum: 1
+        isCurrent:
+          type: boolean
+        issuedAt:
+          type: string
+          format: date-time
+        supersededAt:
+          type: string
+          format: date-time
+          nullable: true
+          description: Null for the current version.
+        currency:
+          $ref: '#/components/schemas/Currency'
+        total:
+          $ref: '#/components/schemas/Money'
+    QuoteVersion:
+      allOf:
+        - $ref: '#/components/schemas/VersionSummary'
+        - type: object
+          required: [validUntil, lineItems]
+          properties:
+            validUntil:
+              type: string
+              format: date
+              nullable: true
+            lineItems:
+              type: array
+              description: May be empty (a quote with no line items must still render).
+              items:
+                $ref: '#/components/schemas/LineItem'
+    QuoteDetailResponse:
+      type: object
+      required: [quote, currentVersion, currentVersionNo, versions]
+      properties:
+        quote:
+          $ref: '#/components/schemas/QuoteSummary'
+        currentVersion:
+          $ref: '#/components/schemas/QuoteVersion'
+        currentVersionNo:
+          type: integer
+          minimum: 1
+        versions:
+          type: array
+          description: All versions, newest first.
+          items:
+            $ref: '#/components/schemas/VersionSummary'
+    QuoteVersionResponse:
+      type: object
+      required: [version, isCurrent, superseded, currentVersionNo]
+      properties:
+        version:
+          $ref: '#/components/schemas/QuoteVersion'
+        isCurrent:
+          type: boolean
+        superseded:
+          type: boolean
+          description: True when a newer version exists. Always the inverse of isCurrent.
+        currentVersionNo:
+          type: integer
+          minimum: 1
+    Health:
+      type: object
+      required: [status]
+      properties:
+        status:
+          type: string
+          enum: [ok, unavailable]
